@@ -4,14 +4,12 @@ import com.example.community.pojo.DiscussPost;
 import com.example.community.pojo.Page;
 import com.example.community.pojo.User;
 import com.example.community.service.IDiscussPostService;
+import com.example.community.service.ILikeService;
 import com.example.community.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +28,9 @@ public class HomeController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private ILikeService likeService;
+
     @GetMapping({"","/index"})
     public String getIndexPage(Model model, Page page) {
         page.setRows(discussPostService.findDiscussPostRows(0));
@@ -44,6 +45,10 @@ public class HomeController {
                 map.put("post", discussPost);
                 User user = userService.findUserById(discussPost.getUserId());
                 map.put("user",user);
+
+                long likeCount = likeService.findEntityLikeCount(1, discussPost.getId());
+                map.put("likeCount",likeCount);
+
                 discussPosts.add(map);
             }
         }
@@ -52,4 +57,16 @@ public class HomeController {
 
         return "index";
     }
+
+    @GetMapping("/error")
+    public String getErrorPage() {
+        return "/error/500";
+    }
+
+    @RequestMapping(path = "/denied", method = RequestMethod.GET)
+    public String getDeniedPage() {
+        return "/error/404";
+    }
+
+
 }

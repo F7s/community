@@ -25,7 +25,7 @@ public class UserMapperTest {
     }
     @Test
     public void testSelectByName(){
-        User user = userMapper.selectByName("iii");
+        User user = userMapper.selectByName("niuke");
 
         System.out.println(user);
     }

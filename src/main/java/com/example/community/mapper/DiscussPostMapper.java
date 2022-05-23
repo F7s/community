@@ -2,6 +2,7 @@ package com.example.community.mapper;
 
 import com.example.community.pojo.DiscussPost;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,17 @@ import java.util.List;
  */
 @Mapper
 public interface DiscussPostMapper {
-    List<DiscussPost> selectDiscussPosts (Integer userId,Integer offset,Integer limit);
+    List<DiscussPost> selectDiscussPosts (@Param("userId") Integer userId,Integer offset,Integer limit);
 
-    Integer selectDiscussPostRows (Integer userId);
+    Integer selectDiscussPostRows (@Param("userId") Integer userId);
+
+    Integer insertDiscussPost(DiscussPost discussPost);
+
+    DiscussPost selectDiscussPostById(Integer id);
+
+    Integer updateCommentCount(Integer id, Integer commentCount);
+
+    int updateType(int id, int type);
+
+    int updateStatus(int id, int status);
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,18 @@ public class DiscussPostMapperTest {
     public void selectDiscussPostsCount () {
         Integer rows = discussPostMapper.selectDiscussPostRows(103);
         System.out.println(rows);
+    }
+
+    @Test
+    public void insertDiscussPost() {
+        DiscussPost discussPost = new DiscussPost();
+        discussPost.setContent("fadsjfjlasd");
+        discussPost.setStatus(2);
+        discussPost.setType(2);
+        discussPost.setTitle("JKJLJLK");
+        discussPost.setUserId(123);
+        discussPost.setCreateTime(new Date());
+        discussPostMapper.insertDiscussPost(discussPost);
     }
 
 

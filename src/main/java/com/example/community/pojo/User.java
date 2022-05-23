@@ -2,7 +2,9 @@ package com.example.community.pojo;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author lizhenghao

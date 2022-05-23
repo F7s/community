@@ -12,4 +12,14 @@ public interface IDiscussPostService {
     List<DiscussPost> findDiscussPosts(Integer userId, Integer offset, Integer limit);
 
     Integer findDiscussPostRows(Integer userId);
+
+    Integer addDiscussPost(DiscussPost post);
+
+    DiscussPost findDiscussPostById(Integer id);
+
+    Integer updateCommentCount(Integer id, Integer commentCount);
+
+    int updateType(int id, int type);
+
+    int updateStatus(int id, int status);
 }
